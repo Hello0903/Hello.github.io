@@ -78,6 +78,8 @@
   </td>
 </tr>
 </table>
+<h1>Xác định mối tương quan giữa X và Y <button class="btn btn-primary tuongquan">Xác định</button></h1>
+<h3>Giá trị tương quan: <label id="gttuongquan"></label></h3>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" >
@@ -249,10 +251,10 @@ function boxplot(arrinput,bang){
   var max = arrinput[arrinput.length -1];
    var vitriq = arrinput.length%4/4;
    var Q1 = 0;
-   Q1 = (arrinput[arrinput.length*0.25- vitriq]+arrinput[arrinput.length*0.25-1 - vitriq])/2
+   Q1 = (arrinput[arrinput.length*0.25- vitriq]+arrinput[arrinput.length*0.25-1 - vitriq])/2;
    var vitriq3 = vitriq*3;
    var Q3 = 0;
-   Q3 = (arrinput[arrinput.length*0.75- vitriq3]+arrinput[arrinput.length*0.75-1 - vitriq3])/2
+   Q3 = (arrinput[arrinput.length*0.75- vitriq3]+arrinput[arrinput.length*0.75-1 - vitriq3])/2;
    console.log(Q3);
    var IQR = Q3 - Q1;
    var L = Q1 - 1.5*IQR;
@@ -317,6 +319,48 @@ $('#tronmeanY').change(function(){
  $('#lamtronmeanY').html(str);
 
 })
+//--------- tinh tuong quan
+$('.tuongquan').click(function(){
+ var demmangX = $('#mang').text();
+ var demmangY = $('#mangY').text();
+ var dolechX = parseFloat($('#dolech').text());
+ var dolechY = parseFloat($('#dolechY').text());;
+ var soptu = lamtronsapxep.length;
+ var trungbinhX = parseFloat($('#trungbinh').text());
+ var trungbinhY = parseFloat($('#trungbinhY').text());
+ var mangX = [];
+ var mangY = [];
+
+ demmangX = demmangX.split(/\s+/);
+ for (var i = 0; i < demmangX.length; i++) {
+ 	mangX[i] = parseFloat(demmangX[i]);
+ }
+
+ demmangY = demmangY.split(/\s+/);
+ for (var i = 0; i < demmangY.length; i++) {
+ 	mangY[i] = parseFloat(demmangY[i]);
+ }
+
+console.log(mangX);
+
+console.log(mangY);
+console.log(dolechX);
+console.log(dolechY);
+console.log(soptu);
+console.log(trungbinhX);
+console.log(trungbinhY);
+var Rxy = 0;
+
+for(let i = 0 ; i < soptu ; i++){
+  Rxy += mangX[i]*mangY[i]; 
+}
+
+var a = (Rxy- soptu*trungbinhX*trungbinhY)/(soptu*dolechX*dolechY);
+$('#gttuongquan').html(a.toFixed(2));
+
+})
+
+
 
 </script>
 </html>
