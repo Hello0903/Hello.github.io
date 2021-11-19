@@ -14,9 +14,11 @@
 <body>
 	<h3>Nhập các phần tử cách nhau dấu cách</h3>
 	<input type="text" name="nhap day 1" id="day1"> <button id="submit1">Gửi</button>
-     
     <h3>Tính toán bài 1</h3>
-     <label id="mang"></label><br>
+      <label>Mảng</label>
+      <label id="mang"></label><br>
+      <label>Mảng sắp xếp</label>
+      <label id="sapxep"></label><br>
      <label>Giá trị trung bình:</label><label id="trungbinh"></label><br>
 
      <label>Giá trị trung vị:</label><label id="trungvi"></label><br>
@@ -54,6 +56,7 @@
       for(let i = 0; i < arr.length; i++) 
   		arrinput[i] = parseFloat(arr[i]);
   		arrinput = sapxep(arrinput);
+  		$('#sapxep').html(arrinput.toString());
   		console.log(arrinput); 	
 //--- gia tri trung binh
        var mean = trungbinh(arrinput);
