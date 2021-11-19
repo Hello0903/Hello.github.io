@@ -3,17 +3,22 @@
 <head>
 	<meta charset="utf-8">
 	<title>Bài 1</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  <style type="text/css">
  	body{
  		margin: 0;
  		padding: 10px;
- 		text-align: center;
+ 		background-image: url(https://hoaidoan.vn/wp-content/uploads/2021/03/background-dep-5.png);
  	}
  </style>
 </head>
 <body>
+	<table class="table">
+		<th><h1>Dãy X</h1></th>
+		<th><h1>Dãy Y</h1></th>
+	<tr><td>
 	<h3>Nhập các phần tử cách nhau dấu cách</h3>
-	<input type="text" name="nhap day 1" id="day1"> <button id="submit1">Gửi</button>
+	<input type="text" name="nhap day 1" id="day1"> <button id="submit1" class="btn btn-primary">Gửi</button>
     <h3>Tính toán bài 1</h3>
       <label>Mảng</label>
       <label id="mang"></label><br>
@@ -39,11 +44,45 @@
       <span id="zcore"></span>
       <h3>Làm trơn trung bình phân thùng theo chiều rộng: <input type="text" name="sothung" id="tronmean"></h3>
       <span id="lamtronmean" style="text-align: center;"></span>
+  </td>
+<!-- ------------------------------------------------------ -->
+  <td>
+  	<h3>Nhập các phần tử cách nhau dấu cách</h3>
+	<input type="text" name="nhap day 1" id="dayY"> <button id="submit2" class="btn btn-primary">Gửi</button>
+    <h3>Tính toán bài 1</h3>
+      <label>Mảng</label>
+      <label id="mangY"></label><br>
+      <label>Mảng sắp xếp</label>
+      <label id="sapxepY"></label><br>
+     <label>Giá trị trung bình:</label><label id="trungbinhY"></label><br>
 
+     <label>Giá trị trung vị:</label><label id="trungviY1"></label><br>
+
+     <label>Giá trị Mode:</label><label id="modeY"></label><br>
+
+     <label>Giá trị độ lệch:</label><label id="dolechY"></label><br>
+     <h3>Biểu đồ BOXPLOT</h3>
+     <label>Trung vị: </label><label id="trungviY"></label><br>
+     <label>Min : </label><label id="minY"></label><br>
+     <label>Max: </label><label id="maxY"></label><br>
+     <label>Q1: </label><label id="Q1Y"></label><br>
+     <label>Q3: </label><label id="Q3Y"></label><br>
+     <label>IQR = Q3 -Q1 = </label><label id="IQRY"></label><br>
+     <label>L = Q1 - 1.5IQR= </label><label id="LY"></label><br>
+     <label>U = Q3 + 1.5IQR= </label><label id="UY"></label><br>
+     <h3>Chuẩn hóa Z-core</h3>
+      <span id="zcoreY"></span>
+      <h3>Làm trơn trung bình phân thùng theo chiều rộng: <input type="text" name="sothung" id="tronmeanY"></h3>
+      <span id="lamtronmeanY" style="text-align: center;"></span>
+
+  </td>
+</tr>
+</table>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" >
 	var lamtronsapxep = [];
+	var lamtronsapxepY =[];
 	$('#submit1').click(function(){
 	 //9.1 4.5 5.3 6.7 6.5 7.0 6.0 5.5 7.0 7.0 8.5 8.6
 	 //8.5 5.5 6.0 7.5 8.5 6.0 6.5 6.8 9.0 7.2 8.0 8.5
@@ -74,19 +113,63 @@
      var dolech1= dolech(arrinput,mean);
      $('#dolech').html(dolech1);
 // boxplot
-   boxplot(arrinput);
+   boxplot(arrinput,1);
 // z core
  var arrayz = [];
   for(let i = 0; i < arr.length; i++) 
   		arrayz[i] = parseFloat(arr[i]);
 
-  chuahoazcore(arrayz,mean,dolech1);
+  chuahoazcore(arrayz,mean,dolech1,1);
  //console.log(arrayz);
  // lam tron mean
  lamtronsapxep = sapxep(arrayz);
 	})
 
+//--------------------------------Day Y
 
+	$('#submit2').click(function(){
+	 //9.1 4.5 5.3 6.7 6.5 7.0 6.0 5.5 7.0 7.0 8.5 8.6
+	 //8.5 5.5 6.0 7.5 8.5 6.0 6.5 6.8 9.0 7.2 8.0 8.5
+        var arr;
+       var data = $('#dayY').val();
+       console.log(data);
+       $('#mangY').html(data);
+       arr = data.split(/\s+/);
+       var arrinput=[];
+      for(let i = 0; i < arr.length; i++) 
+  		arrinput[i] = parseFloat(arr[i]);
+  		arrinput = sapxep(arrinput);
+  		$('#sapxepY').html(arrinput.toString());
+  		console.log(arrinput); 	
+//--- gia tri trung binh
+       var mean = trungbinh(arrinput);
+		$('#trungbinhY').html(mean);	
+//------------------------------------------------
+      var trungvi1 = trungvi(arrinput);
+      $('#trungviY').html(trungvi1);	
+      $('#trungviY1').html(trungvi1);	
+     
+ // // mode-----------------------------------
+
+       var mode = Timsolanxuathien(arrinput);
+       $('#modeY').html(mode);
+     // do lech
+     var dolech1= dolech(arrinput,mean);
+     $('#dolechY').html(dolech1);
+// boxplot
+   boxplot(arrinput,2);
+// z core
+ var arrayz = [];
+  for(let i = 0; i < arr.length; i++) 
+  		arrayz[i] = parseFloat(arr[i]);
+
+  chuahoazcore(arrayz,mean,dolech1,2);
+ //console.log(arrayz);
+ // lam tron mean
+ lamtronsapxepY = sapxep(arrayz);
+	})
+
+//-------------------------------------------
 function sapxep(arrin){
 for(let i = 0 ; i < arrin.length -1 ; i++){
      	for (var j = i+1; j < arrin.length; j++) {
@@ -112,19 +195,6 @@ function trungbinh(arrin){
 function trungvi(arrin){
  var vitritb = (arrin.length)/2;
      
-     // sap xep day
-
-     // for(let i = 0 ; i < arrin.length -1 ; i++){
-     // 	for (var j = i+1; j < arrin.length; j++) {
-    	// 	if(arrin[i] > arrin[j])
-    	// 	{
-    	// 		var temp = arrin[i];
-    	// 		arrin[i] = arrin[j];
-    	// 		arrin[j] = temp;
-    	// 	}
-     // 	}
-     // }
-     // tim trung vi
      if (arrin.length%2 == 0){
          var trungvi = arrin[arrin.length/2]+arrin[arrin.length/2 - 1];
        return trungvi/2;
@@ -174,7 +244,7 @@ var tongbp = 0;
      gtdolech = 1/(arrinput.length)*tongbp - (mean*mean);
 	 	return Math.sqrt(gtdolech).toFixed(2);
 }
-function boxplot(arrinput){
+function boxplot(arrinput,bang){
   var min = arrinput[0];
   var max = arrinput[arrinput.length -1];
    var vitriq = arrinput.length%4/4;
@@ -187,7 +257,7 @@ function boxplot(arrinput){
    var IQR = Q3 - Q1;
    var L = Q1 - 1.5*IQR;
    var U = Q3 + 1.5*IQR;
-
+ if(bang == 1){
   $('#min').html(min);
    $('#max').html(max);
    $('#Q1').html(Q1);
@@ -195,22 +265,33 @@ function boxplot(arrinput){
    $('#IQR').html(IQR);
    $('#L').html(L);
    $('#U').html(U);
- 
+ }
+ if(bang == 2){
+ $('#minY').html(min);
+   $('#maxY').html(max);
+   $('#Q1Y').html(Q1);
+   $('#Q3Y').html(Q3);
+   $('#IQRY').html(IQR);
+   $('#LY').html(L);
+   $('#UY').html(U);
+
+ }
 }
-function chuahoazcore(arrinput,mean,dolech){
+function chuahoazcore(arrinput,mean,dolech,bang){
 	var str = '<ul>';
  for (var i = 0; i < arrinput.length; i++) {
  	str += '<li>V'+(i+1)+' : ' +((arrinput[i]-mean)/dolech).toFixed(2)+'</li>';
  }
  str+='</ul>';
  //console.log(str);
+ if(bang == 1)
 $('#zcore').html(str);
-
-
+ if(bang == 2)
+$('#zcoreY').html(str);
 }
 $('#tronmean').change(function(){
  var sothung = $(this).val();
- var str = '<table style="margin: 0 auto"><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>'
+ var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>'
  for (var i = 0; i < sothung; i++) { 
  	str +='<tr><td>bin '+(i+1)+' ';
  	for(var j = 0; j < lamtronsapxep.length/sothung ; j++){
@@ -220,6 +301,20 @@ $('#tronmean').change(function(){
  }
  console.log(str);
  $('#lamtronmean').html(str);
+
+})
+$('#tronmeanY').change(function(){
+ var sothung = $(this).val();
+ var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>'
+ for (var i = 0; i < sothung; i++) { 
+ 	str +='<tr><td>bin '+(i+1)+' ';
+ 	for(var j = 0; j < lamtronsapxepY.length/sothung ; j++){
+    str += '; '+ lamtronsapxepY[i*lamtronsapxepY.length/sothung+j]+' ';
+ 	}
+ 	str += '</td></tr>';
+ }
+ console.log(str);
+ $('#lamtronmeanY').html(str);
 
 })
 
