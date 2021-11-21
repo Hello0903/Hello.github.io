@@ -291,15 +291,33 @@ $('#zcore').html(str);
  if(bang == 2)
 $('#zcoreY').html(str);
 }
+
 $('#tronmean').change(function(){
- var sothung = $(this).val();
- var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>'
- for (var i = 0; i < sothung; i++) { 
- 	str +='<tr><td>bin '+(i+1)+' ';
- 	for(var j = 0; j < lamtronsapxep.length/sothung ; j++){
-    str += '; '+ lamtronsapxep[i*lamtronsapxep.length/sothung+j]+' ';
- 	}
- 	str += '</td></tr>';
+ var chieurong = $(this).val();
+ // tính số thùng
+ var tongsothung = Math.abs(lamtronsapxep[0] - lamtronsapxep[lamtronsapxep.length -1])/chieurong;
+
+ 
+ var mocgtri = lamtronsapxep[0];
+console.log(lamtronsapxep);
+var vitri = 0;
+ //------------------
+ var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>';
+ for (var i = 0; i < tongsothung; i++) { 
+    var strs += '<tr><td>Bin '+(i+1) + ' </td><td>';
+         for(let j = vitri ; j < lamtronsapxep.length ; j++){
+             if(lamtronsapxep[j] >= (mocgtri+parseFloat(chieurong))){
+            strs += "</td></tr>"
+            mocgtri += parseFloat(chieurong);
+             vitri = j;
+           }
+           if(lamtronsapxep[j] >= mocgtri && lamtronsapxep[j] < (mocgtri+parseFloat(chieurong))){
+             strs += "; "+ lamtronsapxep[j];
+           }
+            
+
+         }
+        console.log(strs);
  }
  console.log(str);
  $('#lamtronmean').html(str);
