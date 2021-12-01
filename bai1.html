@@ -72,7 +72,7 @@
      <label>U = Q3 + 1.5IQR= </label><label id="UY"></label><br>
      <h3>Chuẩn hóa Z-core</h3>
       <span id="zcoreY"></span>
-      <h3>Làm trơn trung bình phân thùng theo chiều rộng: <input type="text" name="sothung" id="tronmeanY"></h3>
+      <h3>Làm trơn trung bình phân thùng theo chiều sâu: <input type="text" name="sothung" id="tronmeanY"></h3>
       <span id="lamtronmeanY" style="text-align: center;"></span>
 
   </td>
@@ -300,27 +300,27 @@ $('#tronmean').change(function(){
  
  var mocgtri = lamtronsapxep[0];
 console.log(lamtronsapxep);
-var vitri = 0;
- //------------------
- var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>';
- for (var i = 0; i < tongsothung; i++) { 
-    var strs += '<tr><td>Bin '+(i+1) + ' </td><td>';
-         for(let j = vitri ; j < lamtronsapxep.length ; j++){
-             if(lamtronsapxep[j] >= (mocgtri+parseFloat(chieurong))){
-            strs += "</td></tr>"
-            mocgtri += parseFloat(chieurong);
-             vitri = j;
-           }
-           if(lamtronsapxep[j] >= mocgtri && lamtronsapxep[j] < (mocgtri+parseFloat(chieurong))){
-             strs += "; "+ lamtronsapxep[j];
-           }
+// var vitri = 0;
+//  //------------------
+//  var str = '<table ><th>ban đầu</th><th>Sau làm trơn (TỰ TÍNH)</th>';
+//  for (var i = 0; i < tongsothung; i++) { 
+//     var strs = '<tr><td>Bin '+(i+1) + ' </td><td>';
+//          for(let j = vitri ; j < lamtronsapxep.length ; j++){
+//              if(lamtronsapxep[j] >= (mocgtri+parseFloat(chieurong))){
+//             strs += "</td></tr>"
+//             mocgtri += parseFloat(chieurong);
+//              vitri = j;
+//            }
+//            if(lamtronsapxep[j] >= mocgtri && lamtronsapxep[j] < (mocgtri+parseFloat(chieurong))){
+//              strs += "; "+ lamtronsapxep[j];
+//            }
             
 
-         }
-        console.log(strs);
- }
- console.log(str);
- $('#lamtronmean').html(str);
+//          }
+//         console.log(strs);
+//  }
+//  console.log(str);
+  $('#lamtronmean').html("Tự tính");
 
 })
 $('#tronmeanY').change(function(){

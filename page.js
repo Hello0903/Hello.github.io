@@ -1,11 +1,23 @@
-$(document).ready(function(){
-   wassub() ;
 
+$(document).ready(function(){
+   wassub();        
+  
+   //var count = readnumbermem();
+ //  $('#number').html(count);
+   
 
 }) 
+function readnumbermem(){
+  var numbersub = 1;
+ var mydata = JSON.parse (data);
+   numbersub = parseInt(mydata[0].number);
+   console.log(numbersub);
+   return numbersub;
+
+}
 function wassub(){
    if(localStorage.getItem('SUBCRIBER') == 1){
-     $('.sub').html('Đã đăng ký');
+     $('.sub').html('Đã đăng ký');    
      $('#wassub').attr('hidden',false);
      $('#xla').html('<a href="xla.html">Tham khảo bảng otsu matran 16*16 </a>');
    }else{ $('#wassub').attr('hidden',true);
@@ -24,6 +36,8 @@ $('.sub').click(function(){
    else {localStorage.setItem('SUBCRIBER',1);
           $('.sub').html('Đã đăng ký');
           alert('Cảm ơn bạn đã đăng ký website :)');
+          var numberat = readnumbermem();
+
           $('#wassub').attr('hidden',false);
           $('#xla').html('<a href="xla.html">Tham khảo bảng otsu matran 16*16 </a>');
          }
